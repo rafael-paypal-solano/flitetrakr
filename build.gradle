@@ -1,0 +1,58 @@
+/*
+ * https://docs.gradle.org/3.5/userguide/java_library_plugin.html
+ */
+
+
+apply plugin: 'java-library'
+apply plugin: 'java-library-distribution'
+
+archivesBaseName = 'flitetrakr'
+version = '1.0-SNAPSHOT'
+group = 'com.assessment'
+rootProject.libsDirName = '../target'
+
+test {
+  systemProperty "com.assessment.flitetrakr.multiple", "true"
+  systemProperty "CONNECTIONS_DATA", project.projectDir
+  
+  testLogging {
+    events "passed", "skipped", "failed", "standardOut", "standardError"
+  }
+  dependsOn 'cleanTest'
+}
+
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    // jcenter()
+     mavenCentral()
+}
+
+dependencies {
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
+
+sourceSets {
+  main {
+    java {
+      srcDir 'main/java/src'
+    }
+  }
+  test {
+    java {
+      srcDir 'main/java/test'
+    }
+    resources {
+    	srcDir 'main/java/test' 
+    }
+  }  
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.assessment.flitetrakr.CLI'
+    }
+}

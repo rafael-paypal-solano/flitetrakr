@@ -1,0 +1,10 @@
+Connections: NUE-FRA-43, NUE-AMS-67, FRA-AMS-17, FRA-LHR-27, LHR-NUE-23
+What is the price of the connection NUE-FRA-LHR?
+What is the price of the connection NUE-AMS-LHR?
+What is the price of the connection NUE-FRA-LHR-NUE?
+What is the cheapest connection from NUE to AMS?
+What is the cheapest connection from AMS to FRA?
+What is the cheapest connection from LHR to LHR?
+How many different connections with maximum 3 stops exists between NUE and FRA?
+How many different connections with minimum 2 stop exists between LHR and AMS?
+Find all connections from NUE to LHR below 170Euros!

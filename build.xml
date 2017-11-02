@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="flitetrakr" default="target" basedir=".">
+	<description>
+    simple example build file
+  </description>
+	<!-- set global properties for this build -->
+	<property name="src" location="main/java/src" />
+	<property name="test" location="main/java/test" />
+	<property name="build" location="build/classes" />
+	<property name="target" location="target" />
+	<property name="junit.lib" location="lib/junit-4.12.jar" />
+
+	<path id="classpath.test">
+		<pathelement location="${build}" />
+		<pathelement location="lib/junit-4.12.jar" />
+		<pathelement location="lib/hamcrest-all-1.3.jar" />
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="info" depends="init">
+		<echo message="The base directory: ${basedir}" />
+		<echo message="This file: ${ant.file}" />
+		<echo message="Ant version: ${ant.version}" />
+		<echo message="Project name: ${ant.project.name}" />
+		<echo message="Java version: ${ant.java.version}" />
+	</target>
+
+	<target name="compile" depends="info" description="compile the source">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}:${test}" destdir="${build}" includeantruntime="true">
+			<classpath>
+				<pathelement location="lib/junit-4.12.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="copy-test-resources" depends="compile" description="copies resources">
+		<echo message="from ${test}/com/assessment/flitetrakr to ${build}/com/assessment/flitetrakr" />
+		<copy todir="${build}/com/assessment/flitetrakr">			
+			<fileset dir="${test}/com/assessment/flitetrakr">
+				<include name="**/*.txt"/>
+			</fileset>
+		</copy>
+	</target>
+
+
+
+	<target name="test" depends="copy-test-resources">
+
+		<junit fork="true">
+			<jvmarg value="-DCONNECTIONS_DATA=${basedir}" />
+			<jvmarg value="-Dcom.assessment.flitetrakr.multiple=true" />
+			
+			<classpath>
+				<path refid="classpath.test" />
+			</classpath>
+			<batchtest>
+				<fileset dir="${build}">
+					<include name="**/*Test*" />
+				</fileset>
+			</batchtest>
+
+			<formatter type="brief" usefile="false" />
+
+		</junit>
+	</target>
+
+	<target name="target" depends="test" description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${target}" />
+
+		<!-- Put everything in ${build} into the flitetrakr-1.0-SNAPSHOT.jar file -->
+		<jar jarfile="${target}/flitetrakr-1.0-SNAPSHOT.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="com.assessment.flitetrakr.CLI"/>
+                <attribute name="Class-Path" value="${manifest.classpath}"/>
+            </manifest>			
+		</jar>
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${target} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${target}" />
+	</target>
+</project>

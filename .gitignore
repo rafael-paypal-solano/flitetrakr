@@ -1,0 +1,6 @@
+build/
+doc/
+.gradle/3.5/taskHistory/
+target/
+.gradle/3.5/fileContent/
+.gradle/3.5/fileContent/fileContent.lock

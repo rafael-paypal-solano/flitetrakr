@@ -1,0 +1,11 @@
+Connections: A-X-3, A-B-1, A-C-2, B-D-2, C-D-3, D-E-1, X-B-1, X-C-5, C-Z-3, E-Y-1, C-Y-3, Y-D-1, Z-Y-2
+What is the cheapest connection from A to E ?
+What is the price of the connection A-X-C-D-E?
+How many different connections with maximum 3 stops exist between X and E?
+How many different connections with maximum 2 stops exist between X and E?
+How many different connections with exactly 3 stop exists between A and E?
+How many different connections with minimum 4 stop exists between A and Y?
+How many different connections with minimum 2 stop exists between X and Y?
+Find all connections from A to E below 7 Euros!
+Find all connections from A to E below 6 Euros!
+Find all connections from A to E below 4 Euros!
